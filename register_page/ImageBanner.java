@@ -12,7 +12,7 @@ public class ImageBanner extends JPanel {
         bannerlbl = new JLabel();
         bannerlbl.setBounds(0, 0, 720, 720);
 
-        banner = new ImageIcon("images/banner.png");
+        banner = new ImageIcon("./images/banner.png");
         
         bannerlbl.setIcon(banner);
         this.add(bannerlbl);

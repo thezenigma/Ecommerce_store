@@ -25,9 +25,9 @@ public class shopHeader extends JPanel implements ActionListener, MouseListener{
         this.setBounds(0, 0, 1280, 80);
         this.setBackground(headerColor);
 
-        cartImg = new ImageIcon("images/shopping-cart.png");
-        accImg = new ImageIcon("images/account.png");
-        logoutImg = new ImageIcon("images/logout-btn.png");
+        cartImg = new ImageIcon("./images/shopping-cart.png");
+        accImg = new ImageIcon("./images/account.png");
+        logoutImg = new ImageIcon("./images/logout-btn.png");
 
         headerlbl = new JLabel("Crafty");
         headerlbl.setBounds(60, 15, 400, 50);

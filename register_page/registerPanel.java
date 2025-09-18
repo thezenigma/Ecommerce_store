@@ -1,5 +1,4 @@
 package register_page;
-import javax.smartcardio.Card;
 import javax.swing.*;
 
 import entities.account;

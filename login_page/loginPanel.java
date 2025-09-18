@@ -57,8 +57,8 @@ public class loginPanel extends JPanel implements ActionListener, MouseListener 
         loginButton = new JButton("Login");
         loginButton.setBounds(140, 310, 150, 40);
         loginButton.setFont(new Font("Helvetica", Font.BOLD, 14));
-        loginButton.setForeground(Color.white);
-        loginButton.setBackground(Color.blue);
+        loginButton.setForeground(Color.WHITE);
+        loginButton.setBackground(Color.BLUE);
         loginButton.addActionListener(this);
         loginButton.addMouseListener(this);
         this.add(loginButton);
@@ -113,7 +113,6 @@ public class loginPanel extends JPanel implements ActionListener, MouseListener 
 
         public void mouseEntered(MouseEvent me){
             if(me.getSource() == loginButton){
-                
                 loginButton.setBackground(Color.WHITE);
                 loginButton.setForeground(Color.BLUE);
             }
