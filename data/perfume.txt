@@ -1,0 +1,6 @@
+COCO Chanel Perfume	$34.87	cocochanel
+Daisy Dear Perfume	$38.20	daisydear
+GUCCI Perfume	$49.99	gucciperfume
+Nashwa Perfume	$39.99	nashwa
+Vanilla Rush Perfume	$30.99	vanillarush
+Victoria's Perfume	$45.99	victoria

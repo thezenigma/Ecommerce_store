@@ -112,13 +112,13 @@ public class Category extends JPanel implements ActionListener, MouseListener{
             card.show(shopBody, "Makeup");
         }
         else if (e.getSource() == cat4) {
-            card.show(shopBody, "Hair_Oil");
+            card.show(shopBody, "Hair_Care");
         }
         else if (e.getSource() == cat5) {
-
+            card.show(shopBody, "Perfume");
         }
         else if (e.getSource() == cat6) {
-
+            card.show(shopBody, "Nails");
         }
        
     }

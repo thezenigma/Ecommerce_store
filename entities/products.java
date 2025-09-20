@@ -1,21 +1,19 @@
 package entities;
-import shop_page.*;
 
 import javax.swing.*;
 
 public class products {
     private String productName;
-    private float price;
-    private boolean isAvailable;
+    private String price;
     private ImageIcon prodImg;
 
     public products() {
     }
 
-    public products(String productName, float price, boolean isAvailable) {
+    public products(String productName, String price, String imgfile) {
         this.productName = productName;
         this.price = price;
-        this.isAvailable = isAvailable;
+        prodImg = new ImageIcon(imgfile);
     }
 
     public void setProductName(String productName) {
@@ -26,21 +24,14 @@ public class products {
         return productName;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
-    public float getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setIsAvailable(boolean isAvailable) {
-        this.isAvailable = isAvailable;
-    }
-
-    public boolean getIsAvailable() {
-        return isAvailable;
-    }
 
     public void setImage(String address) {
         prodImg = new ImageIcon(address);

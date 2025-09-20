@@ -21,15 +21,19 @@ public class shopPage extends JPanel {
         cart = new cartPanel();
         category = new Category(cardCategory, shopBody);
 
-        cat1 = new shopBody("./images/face_pack.png", "Natural Face Pack", "500");
-        cat2 = new shopBody("./images/salicylic_acid.png", "Salicylic Acid", "6500");
-        cat3 = new shopBody("./images/makeup_kit.jpeg", "Makeup Kit", "9000");
-        cat4 = new shopBody("./images/hair_oil.png", "Lumina Hair Oil", "3000");
+        cat1 = new shopBody("./data/face_packs.txt");
+        cat2 = new shopBody("./data/skincare.txt");
+        cat3 = new shopBody("./data/makeup.txt");
+        cat4 = new shopBody("./data/hair_care.txt");
+        cat5 = new shopBody("./data/perfume.txt");
+        cat6 = new shopBody("./data/nails.txt");
         
         shopBody.add(cat1, "Face_Pack");
         shopBody.add(cat2, "Skincare");
         shopBody.add(cat3, "Makeup");
-        shopBody.add(cat4, "Hair_Oil");
+        shopBody.add(cat4, "Hair_Care");
+        shopBody.add(cat5, "Perfume");
+        shopBody.add(cat6, "Nails");
 
         
         cart.setPreferredSize(new Dimension(360, 1200));

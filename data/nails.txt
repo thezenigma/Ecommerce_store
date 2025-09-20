@@ -1,0 +1,6 @@
+Black Nail Polish	$15.35	blackNP
+Blue Nail Polish	$16.20	blueNP
+Green Nail Polish	$18.32	greenNP
+Red Nail Polish	$17.99	redNP
+White Nail Polish	$20.35	whiteNP
+Yellow Nail Polish	$19.20	yellowNP

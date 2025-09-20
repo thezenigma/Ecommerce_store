@@ -1,0 +1,5 @@
+Green Tea Sunscreen	$39.99	greenteasunscreen
+Ordinary Niacinamide Serum	$35.25	ordinaryniacinamide
+Ordinary Soothing Serum	$37.48	ordinarysoothing
+Salicylic Acid	$31.30	salicylicacid
+Turmaric Sunscreen	$25.29	turmaricsunscreen
