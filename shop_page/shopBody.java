@@ -2,7 +2,7 @@ package shop_page;
 
 import javax.swing.*;
 
-import entities.products;
+import entities.*;
 
 import java.awt.*;
 import java.awt.event.*;

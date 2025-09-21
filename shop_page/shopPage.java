@@ -19,7 +19,7 @@ public class shopPage extends JPanel {
         cardCategory = new CardLayout();
         shopBody = new JPanel(cardCategory);
         cart = new cartPanel();
-        category = new Category(cardCategory, shopBody);
+        
 
         cat1 = new shopBody("./data/face_packs.txt");
         cat2 = new shopBody("./data/skincare.txt");
@@ -47,6 +47,7 @@ public class shopPage extends JPanel {
         cartScroll.setBounds(1280, 80, 360, 640);
 
         head = new shopHeader(card, pageHolder, cartScroll);
+        category = new Category(cardCategory, shopBody, bodyScroll);
 
         this.add(head);
         this.add(category);

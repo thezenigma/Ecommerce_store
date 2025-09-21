@@ -6,16 +6,16 @@ import javax.smartcardio.Card;
 import javax.swing.*;
 
 public class Category extends JPanel implements ActionListener, MouseListener{
-    //JLabel catLbl;
-    //Font titleFont = new Font("Arial", Font.BOLD, 28);
     Font buttonFont = new Font("Arial", Font.PLAIN, 20);
     JButton cat1, cat2, cat3, cat4, cat5, cat6;
     CardLayout card;
     JPanel shopBody;
+    JScrollPane bodyScroll;
 
-    public Category(CardLayout card, JPanel shopBody) {
+    public Category(CardLayout card, JPanel shopBody, JScrollPane bodyScroll) {
         this.card = card;
         this.shopBody = shopBody;
+        this.bodyScroll = bodyScroll;
         this.setLayout(null);
         this.setBounds(0, 80, 250, 640);  
         this.setBackground(Color.WHITE);
@@ -104,21 +104,27 @@ public class Category extends JPanel implements ActionListener, MouseListener{
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == cat1) {
             card.show(shopBody, "Face_Pack");
+            bodyScroll.getVerticalScrollBar().setValue(0);
         }
         else if (e.getSource() == cat2) {
             card.show(shopBody, "Skincare");
+            bodyScroll.getVerticalScrollBar().setValue(0);
         }
         else if (e.getSource() == cat3) {
             card.show(shopBody, "Makeup");
+            bodyScroll.getVerticalScrollBar().setValue(0);
         }
         else if (e.getSource() == cat4) {
             card.show(shopBody, "Hair_Care");
+            bodyScroll.getVerticalScrollBar().setValue(0);
         }
         else if (e.getSource() == cat5) {
             card.show(shopBody, "Perfume");
+            bodyScroll.getVerticalScrollBar().setValue(0);
         }
         else if (e.getSource() == cat6) {
             card.show(shopBody, "Nails");
+            bodyScroll.getVerticalScrollBar().setValue(0);
         }
        
     }
