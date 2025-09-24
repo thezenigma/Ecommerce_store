@@ -10,8 +10,7 @@ import java.io.*;
 import java.util.*;
 
 public class shopBody extends JPanel{
-    Color bgColor = new Color(255, 229, 180);
-    
+    Color bgColor = new Color(250, 250, 250);
     productPanel[][] productPanels;
     int widthAdd, heightAdd, count;
     String filename;
@@ -25,7 +24,7 @@ public class shopBody extends JPanel{
         insertPrd(prdArray);
         this.setPreferredSize(new Dimension(1030, 1200));
         this.setLayout(null);
-        this.setBackground(bgColor);
+        this.setBackground(new Color(255, 228, 225));
         productPanels = new productPanel[3][3];
         for (int i = 0; i < 3; i++) {
             widthAdd = 0;

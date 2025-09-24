@@ -11,7 +11,7 @@ public class cartPanel extends JPanel {
     
     public cartPanel() {
         this.setLayout(null);
-        this.setBackground(Color.LIGHT_GRAY);
+        this.setBackground(new Color(255, 253, 249));
         testLabel = new JLabel("CART");
         testLabel.setBounds(130, 20, 100, 30);
         testLabel.setFont(new Font("Baskerville Old Face", Font.PLAIN, 24));

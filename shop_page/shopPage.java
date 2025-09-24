@@ -10,6 +10,7 @@ public class shopPage extends JPanel {
     shopBody cat1, cat2, cat3, cat4, cat5, cat6;
     JScrollPane bodyScroll, cartScroll;
     cartPanel cart;
+    toCheckoutPanel checkout;
     JPanel shopBody;
     CardLayout card, cardCategory;
     public shopPage(CardLayout card, JPanel pageHolder) {
@@ -19,6 +20,7 @@ public class shopPage extends JPanel {
         cardCategory = new CardLayout();
         shopBody = new JPanel(cardCategory);
         cart = new cartPanel();
+        checkout = new toCheckoutPanel();
         
 
         cat1 = new shopBody("./data/face_packs.txt");
@@ -44,9 +46,9 @@ public class shopPage extends JPanel {
         bodyScroll.getVerticalScrollBar().setPreferredSize(new Dimension(25, Integer.MAX_VALUE));
         cartScroll.getVerticalScrollBar().setPreferredSize(new Dimension (10, Integer.MAX_VALUE));
         bodyScroll.setBounds(250, 80, 1030, 640);
-        cartScroll.setBounds(1280, 80, 360, 640);
+        cartScroll.setBounds(920, 80, 360, 520);
 
-        head = new shopHeader(card, pageHolder, cartScroll);
+        head = new shopHeader(card, pageHolder, cartScroll,checkout);
         category = new Category(cardCategory, shopBody, bodyScroll);
 
         this.add(head);
@@ -54,6 +56,10 @@ public class shopPage extends JPanel {
         this.add(bodyScroll);
         cardCategory.show(shopBody, "Face_Pack");
         this.add(cartScroll);
+        this.add(checkout);
         this.setComponentZOrder(cartScroll, 0);
+        this.setComponentZOrder(checkout, 0);
+        cartScroll.setVisible(false);
+        checkout.setVisible(false);
     }
 }
