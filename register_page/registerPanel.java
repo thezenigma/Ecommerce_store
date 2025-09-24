@@ -1,10 +1,8 @@
 package register_page;
-import javax.swing.*;
-
 import entities.account;
-
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.*;
 
 public class registerPanel extends JPanel implements ActionListener, MouseListener{
     JLabel registerLabel, name, email, pass, welcomeMsg, errorMsg, promptLabel;
@@ -167,6 +165,7 @@ public class registerPanel extends JPanel implements ActionListener, MouseListen
         }
     }
 
+
     public void mouseExited(MouseEvent me) {
         if (me.getSource() == regButton) {
             regButton.setBackground(Color.BLUE);
@@ -176,6 +175,7 @@ public class registerPanel extends JPanel implements ActionListener, MouseListen
             loginPage.setForeground(Color.BLUE);
         }
     }
+   
 
 
 }

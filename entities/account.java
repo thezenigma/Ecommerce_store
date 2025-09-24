@@ -1,6 +1,5 @@
 package entities;
 
-import javax.swing.*;
 import java.io.*;
 import java.util.*;
 
@@ -63,6 +62,7 @@ public class account {
         return this.pass.equals(input);
    }
 
+    @SuppressWarnings("CallToPrintStackTrace")
    public void addAccount() {
        try {
            myFile = new File("data/userdata.txt");
@@ -79,6 +79,7 @@ public class account {
        }
    }
 
+    @SuppressWarnings("CallToPrintStackTrace")
    public boolean findAccount(String email) {
        int endidx = email.indexOf("@");
        email = email.substring(0, endidx);
@@ -100,6 +101,38 @@ public class account {
        }
        return flag;
    }
+   
+   public boolean checkCredentials(String input, String pass) {
+    boolean flag = false;
+
+    try {
+        File myFile = new File("data/userdata.txt");
+        Scanner sc = new Scanner(myFile);
+
+        while (sc.hasNextLine()) {
+            String line = sc.nextLine();
+
+            if (!line.isEmpty()) {
+                String[] parts = line.split("\t");  
+
+                String fileEmail = parts[1];
+                String filePass  = parts[2];
+
+                fileEmail += "@gmail.com";
+
+                if (input.equals(fileEmail) && pass.equals(filePass)) {
+                    flag = true;
+                    break;
+                }
+            }
+        }
+        sc.close();
+    } catch (IOException ex) {
+        ex.printStackTrace();
+    }
+
+    return flag;
+}
    
 
 }

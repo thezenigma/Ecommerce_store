@@ -1,7 +1,8 @@
 package login_page;
+import entities.*;
 import java.awt.*;
 import java.awt.event.*;
-import javax.swing.*;
+import javax.swing.*;     
 
 public class loginPanel extends JPanel implements ActionListener, MouseListener {
     JLabel loginLabel, email, pass, welcomeMsg, errorMsg;
@@ -34,7 +35,7 @@ public class loginPanel extends JPanel implements ActionListener, MouseListener 
         welcomeMsg.setFont(bodyFont);
         this.add(welcomeMsg);
 
-        email = new JLabel("Email");
+        email =new JLabel("Email");
         email.setFont(bodyFont);
         email.setBounds(60, 150, 100, 30);
         this.add(email);
@@ -83,59 +84,69 @@ public class loginPanel extends JPanel implements ActionListener, MouseListener 
         registerPage.addActionListener(this);
         registerPage.addMouseListener(this);
         this.add(registerPage);
+        }
+
+
+
+   public void actionPerformed(ActionEvent e) {
+    if (e.getSource() == loginButton) {
+        account a1 = new account();
+        String s2 = emailField.getText();
+        String s3 = passField.getText();
+
+        if (s2.trim().isEmpty() || s3.trim().isEmpty()) {
+            errorMsg.setText("Please enter valid email and password!");
+        }
+
+        else if (s2.indexOf("@gmail.com") == -1) {
+            errorMsg.setText("Please enter a valid email address!");
+        }
+
+            // file check
+        else if (a1.checkCredentials(s2, s3)) {
+            errorMsg.setText(null);
+            emailField.setText(null);
+            passField.setText(null);
+            JOptionPane.showMessageDialog(this, "Login successful! Welcome " + s2);
+            card.show(pageHolder, "shop");
+        } 
+        else {
+            errorMsg.setText("Invalid Email or Password!");
+        }
+
+    }
+    else if (e.getSource() == registerPage) {
+        card.show(pageHolder, "register");
+    }
+   }
+    public void mouseClicked(MouseEvent me){}
+
+    public void mouseReleased(MouseEvent me) {
+            
     }
 
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == loginButton) {
-            String emailTxt = emailField.getText().trim();
-            String password = new String(passField.getPassword());
+    public void mouseEntered(MouseEvent me){
+        if(me.getSource() == loginButton){
+            loginButton.setBackground(Color.WHITE);
+            loginButton.setForeground(Color.BLUE);
+        }
+        else if (me.getSource() == registerPage){
+            registerPage.setForeground(Color.BLACK);
+        }
+    }   
 
-            if (!emailTxt.isEmpty() && !password.isEmpty()) {
-                errorMsg.setText(null);
-                emailField.setText(null);
-                passField.setText(null);
-                JOptionPane.showMessageDialog(null, "Login completed successfully! Welcome!");
-                card.show(pageHolder, "shop");
-            } else {
-                errorMsg.setText("Please enter Email and Password!");
-            }
+    public void mouseExited(MouseEvent me) {
+        if (me.getSource() == loginButton) {
+            loginButton.setBackground(Color.BLUE);
+            loginButton.setForeground(Color.WHITE);
+        } else if (me.getSource() == registerPage) {
+            registerPage.setForeground(Color.BLUE);
         }
-        else if (e.getSource() == registerPage) {
-            card.show(pageHolder, "register");
-        }
+
     }
-////////////////////////////////
-        public void mouseClicked(MouseEvent me){}
 
-         public void mouseReleased(MouseEvent me) {
+    public void mousePressed(MouseEvent me) {
             
-        }
-
-        public void mouseEntered(MouseEvent me){
-            if(me.getSource() == loginButton){
-                loginButton.setBackground(Color.WHITE);
-                loginButton.setForeground(Color.BLUE);
-            }
-            else if (me.getSource() == registerPage){
-                registerPage.setForeground(Color.BLACK);
-            }
-
-        }   
-
-        public void mouseExited(MouseEvent me) {
-            if (me.getSource() == loginButton) {
-                loginButton.setBackground(Color.BLUE);
-                loginButton.setForeground(Color.WHITE);
-            } else if (me.getSource() == registerPage) {
-                registerPage.setForeground(Color.BLUE);
-            }
-
-        }
-
-        public void mousePressed(MouseEvent me) {
-            
-        }
+    }
         
-    }
-
-
+}
