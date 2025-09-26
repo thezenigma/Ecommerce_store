@@ -1,8 +1,8 @@
 package shop_page;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.*;
 
 public class toCheckoutPanel extends JPanel implements ActionListener, MouseListener {
     Color btncolor = new Color(0, 128, 128);
@@ -10,11 +10,12 @@ public class toCheckoutPanel extends JPanel implements ActionListener, MouseList
     JButton checkoutbtn;
     JLabel total, totalAmt;
     Font btnfont = new Font("Helvetica", Font.BOLD, 20);
+
+
     public toCheckoutPanel() {
         this.setLayout(null);
         this.setBounds(920, 600, 360, 140);
         this.setBackground(new Color(255, 243, 249));
-        this.
 
         checkoutbtn = new JButton("Checkout");
         checkoutbtn.setBounds(90, 20, 230, 50);
@@ -30,7 +31,7 @@ public class toCheckoutPanel extends JPanel implements ActionListener, MouseList
         total.setBounds(20, 20, 60, 30);
         total.setFont(new Font("Helvetica", Font.BOLD, 16));
 
-        totalAmt = new JLabel("$33.99");
+        totalAmt = new JLabel("$0.00");
         totalAmt.setBounds(20, 40, 60, 30);
         totalAmt.setFont(new Font("Helvetica", Font.PLAIN, 12));
 
@@ -38,6 +39,14 @@ public class toCheckoutPanel extends JPanel implements ActionListener, MouseList
         this.add(total);
         this.add(totalAmt);
     }
+
+    //#####################################
+     // ✅ update total dynamically
+    public void updateTotal(double totalValue) {
+        totalAmt.setText("$" + String.format("%.2f", totalValue));
+    }
+  
+    //###################################
     @Override
     public void mouseClicked(MouseEvent e) {
         
@@ -66,4 +75,5 @@ public class toCheckoutPanel extends JPanel implements ActionListener, MouseList
     public void actionPerformed(ActionEvent e) {
        
     }
+
 }

@@ -14,25 +14,38 @@ public class cartCard extends JPanel implements ActionListener, MouseListener{
     Font buttonFont = new Font("Helvetica", Font.PLAIN, 12);
     Font priceFont = new Font("Helvetica", Font.PLAIN, 12);
     Font nameFont = new Font("Helvetica", Font.BOLD, 16);
+    cartPanel cart;
 
-    public cartCard() {
+    //last...........
+   // public void setCartPanel(cartPanel c) {
+    //this.cart = c;
+     //}
+
+    ///////////////////////////
+    int quantity = 1;
+    double unitPrice;
+    /////////////////////////////
+
+    public cartCard(String name, String price, String imageName) {/////////////////////////
         this.setLayout(null);
         this.setBounds(15, 60, 315, 150);
         this.setBackground(new Color(255, 224, 217));
 
-        prdImg = new ImageIcon("./images/blueNP.png");
+        prdImg = new ImageIcon("images/" + imageName + ".png");
         scaledPrdImg = prdImg.getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
         prdImg = new ImageIcon(scaledPrdImg);
         imgLabel = new JLabel(prdImg);
         imgLabel.setBounds(20, 30, 90, 90);
 
-        nameLabel = new JLabel("Blue Nail Polish");
+        nameLabel = new JLabel(name);////////////
         nameLabel.setFont(nameFont);
         nameLabel.setBounds(130, 30, 130, 30);
 
-        priceLabel = new JLabel("$39.99");
+        priceLabel = new JLabel(price);//////////////
         priceLabel.setFont(priceFont);
         priceLabel.setBounds(130, 50, 60, 30);
+
+        unitPrice = Double.parseDouble(price.substring(1));
 
         add = new JButton("+");
         add.setFont(buttonFont);
@@ -45,7 +58,7 @@ public class cartCard extends JPanel implements ActionListener, MouseListener{
         add.addActionListener(this);
         add.addMouseListener(this);
 
-        qtyLabel = new JLabel("1", SwingConstants.CENTER);
+        qtyLabel = new JLabel(String.valueOf(quantity), SwingConstants.CENTER);///////////////////////
         qtyLabel.setFont(priceFont);
         qtyLabel.setBounds(240, 90, 30, 30);
 
@@ -70,8 +83,10 @@ public class cartCard extends JPanel implements ActionListener, MouseListener{
         delete.setBorderPainted(false);
         delete.setContentAreaFilled(false);
         delete.addActionListener(this);
+   
 
-        totalLabel = new JLabel("Total: $39.99");
+
+        totalLabel = new JLabel("Total: $" + String.format("%.2f", unitPrice));//////////////////
         totalLabel.setBounds(210, 120, 80, 30);
         totalLabel.setFont(priceFont);
 
@@ -84,20 +99,71 @@ public class cartCard extends JPanel implements ActionListener, MouseListener{
         this.add(delete);
         this.add(totalLabel);
     }
-
-    @Override
+///////////////////////////////////////////////////
+  @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == add) {
-
-        }
-        else if (e.getSource() == subtract) {
-
-        }
-        else if (e.getSource() == delete) {
-            
+            quantity++;
+            qtyLabel.setText(String.valueOf(quantity));
+            updateTotal();
+        } else if (e.getSource() == subtract) {
+            if (quantity > 1) {
+                quantity--;
+                qtyLabel.setText(String.valueOf(quantity));
+                updateTotal();
+            }
+        } else if (e.getSource() == delete) {
+            if (cart != null) {
+                cart.deleteProduct(this);  //
+            }
         }
     }
+    //   //########################################3
+    //     // 🔔 notify shopPage to update checkout total
+    //     notifyCheckoutUpdate();
+    //     //###########################################
+     private void updateTotal() {
+        totalLabel.setText("Total: $" + String.format("%.2f", unitPrice * quantity));
+        cart.calculateTotal(); // update checkout
+    }
+    //#########################################
+    public double getTotal() {
+        return unitPrice * quantity;
+    }
+     public String getProductName() {
+        return nameLabel.getText();
+    }
 
+    public void increaseQuantity() {
+        quantity++;
+        qtyLabel.setText(String.valueOf(quantity));
+        updateTotal();
+    }
+    public void setCartPanel(cartPanel cart) {
+        this.cart = cart;
+    }
+
+
+    // private void notifyCheckoutUpdate() {
+    //     Container parent = this.getParent();
+    //     while (parent != null && !(parent instanceof cartPanel)) {
+    //         parent = parent.getParent();
+    //     }
+    //     if (parent instanceof cartPanel) {
+    //         cartPanel cp = (cartPanel) parent;
+
+    //         Container main = cp.getParent();
+    //         while (main != null && !(main instanceof shopPage)) {
+    //             main = main.getParent();
+    //         }
+    //         if (main instanceof shopPage) {
+    //             shopPage sp = (shopPage) main;
+    //             sp.updateCheckoutTotal();
+    //         }
+    //     }
+    // }
+
+    //@#########################################
     @Override
     public void mouseClicked(MouseEvent e) {
         
@@ -132,6 +198,5 @@ public class cartCard extends JPanel implements ActionListener, MouseListener{
             subtract.setBackground(btncolor);
         }
     }
-    
 
 }
