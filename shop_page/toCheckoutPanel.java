@@ -9,12 +9,15 @@ public class toCheckoutPanel extends JPanel implements ActionListener, MouseList
     Color hovercolor = new Color(64, 192, 192);
     JButton checkoutbtn;
     JLabel total, totalAmt;
+    CardLayout card;
+    JPanel pageHolder;
     Font btnfont = new Font("Helvetica", Font.BOLD, 20);
-    public toCheckoutPanel() {
+    public toCheckoutPanel(CardLayout card, JPanel pageHolder) {
         this.setLayout(null);
         this.setBounds(920, 600, 360, 140);
         this.setBackground(new Color(255, 243, 249));
-        this.
+        this.card = card;
+        this.pageHolder = pageHolder;
 
         checkoutbtn = new JButton("Checkout");
         checkoutbtn.setBounds(90, 20, 230, 50);
@@ -64,6 +67,8 @@ public class toCheckoutPanel extends JPanel implements ActionListener, MouseList
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-       
+        if (e.getSource() == checkoutbtn) {
+            card.show(pageHolder, "checkout");
+       }
     }
 }

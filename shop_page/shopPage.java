@@ -20,7 +20,7 @@ public class shopPage extends JPanel {
         cardCategory = new CardLayout();
         shopBody = new JPanel(cardCategory);
         cart = new cartPanel();
-        checkout = new toCheckoutPanel();
+        checkout = new toCheckoutPanel(card, pageHolder);
         
 
         cat1 = new shopBody("./data/face_packs.txt");

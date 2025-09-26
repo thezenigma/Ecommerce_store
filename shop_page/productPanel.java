@@ -16,6 +16,7 @@ public class productPanel extends JPanel implements ActionListener,MouseListener
     JLabel imgLabel, name, price;
     JButton addButton;
     products prd;
+    cartPanel cart;
     
 
     public productPanel(products prd) {

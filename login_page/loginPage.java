@@ -3,6 +3,7 @@ package login_page;
 import java.awt.CardLayout;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class loginPage extends JPanel {
     ImageBanner imageBanner;
@@ -10,6 +11,7 @@ public class loginPage extends JPanel {
     public loginPage(CardLayout card, JPanel pageHolder) {
         this.setLayout(null);
         this.setBounds(0, 0, 1280, 720);
+        this.setBackground(new Color(255, 228, 225));
         
         loginPanel = new loginPanel(card, pageHolder);
         imageBanner = new ImageBanner();

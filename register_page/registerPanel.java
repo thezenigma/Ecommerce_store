@@ -20,7 +20,7 @@ public class registerPanel extends JPanel implements ActionListener, MouseListen
         this.pageHolder = pageHolder;
         this.setLayout(null);
         this.setBounds(775, 55, 440, 580);
-        this.setBackground(new Color(255, 250, 241));
+        this.setBackground(new Color(255, 245, 230));
 
         registerLabel = new JLabel("Register", SwingConstants.CENTER);
         registerLabel.setLayout(null);
@@ -68,7 +68,7 @@ public class registerPanel extends JPanel implements ActionListener, MouseListen
         regButton.setBounds(145, 410, 150, 40);
         regButton.setFont(new Font("Helvetica", Font.BOLD, 14));
         regButton.setForeground(Color.WHITE);
-        regButton.setBackground(Color.BLUE);
+        regButton.setBackground(new Color(0, 128, 128));
         regButton.addActionListener(this);
         regButton.addMouseListener(this);
         this.add(regButton);
@@ -90,7 +90,7 @@ public class registerPanel extends JPanel implements ActionListener, MouseListen
         loginPage.setBounds(250, 490, 80, 30);
         loginPage.setBorderPainted(false);
         loginPage.setContentAreaFilled(false);
-        loginPage.setForeground(Color.blue);
+        loginPage.setForeground(new Color(0, 128, 128));
         loginPage.addActionListener(this);
         loginPage.addMouseListener(this);
         loginPage.setFont(new Font("Helvetica", Font.BOLD, 12));
@@ -142,37 +142,29 @@ public class registerPanel extends JPanel implements ActionListener, MouseListen
     }
 
     public void mouseReleased(MouseEvent me) {
-         if (me.getSource() == regButton) {
-            regButton.setBackground(Color.WHITE);
-            regButton.setForeground(Color.BLUE);
-        }
+        
     }
     
     public void mousePressed(MouseEvent me) {
-        if (me.getSource() == regButton) {
-            regButton.setBackground(Color.BLUE);
-            regButton.setForeground(Color.WHITE);
-        }
+        
     }
 
     public void mouseEntered(MouseEvent me) {
         if (me.getSource() == regButton) {
-            regButton.setBackground(Color.WHITE);
-            regButton.setForeground(Color.BLUE);
+            regButton.setBackground(new Color(64, 192, 192));
         }
         else if (me.getSource() == loginPage) {
-            loginPage.setForeground(Color.BLACK);
+            loginPage.setForeground(new Color(64, 192, 192));
         }
     }
 
 
     public void mouseExited(MouseEvent me) {
         if (me.getSource() == regButton) {
-            regButton.setBackground(Color.BLUE);
-            regButton.setForeground(Color.WHITE);
+            regButton.setBackground(new Color(0, 128, 128));
         }
         else if (me.getSource() == loginPage) {
-            loginPage.setForeground(Color.BLUE);
+            loginPage.setForeground(new Color(64, 192, 192));
         }
     }
    

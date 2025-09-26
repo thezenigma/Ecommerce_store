@@ -10,7 +10,6 @@ import java.io.*;
 import java.util.*;
 
 public class shopBody extends JPanel{
-    Color bgColor = new Color(250, 250, 250);
     productPanel[][] productPanels;
     int widthAdd, heightAdd, count;
     String filename;

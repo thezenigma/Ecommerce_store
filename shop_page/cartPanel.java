@@ -8,6 +8,8 @@ public class cartPanel extends JPanel {
     Color bodyColor = new Color(234, 56, 87);
     JLabel testLabel;
     cartCard card;
+    String prdName, prdPrice;
+    ImageIcon prdImage;
     
     public cartPanel() {
         this.setLayout(null);
