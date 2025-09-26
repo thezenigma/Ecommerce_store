@@ -1,9 +1,8 @@
 package shop_page;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.lang.reflect.InaccessibleObjectException;
+import javax.swing.*;
 
 public class shopHeader extends JPanel implements ActionListener, MouseListener{
     Color headerColor = new Color(255, 182, 193);

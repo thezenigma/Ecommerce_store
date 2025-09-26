@@ -1,8 +1,6 @@
 package shop_page;
 import java.awt.*;
 import java.awt.event.*;
-
-import javax.smartcardio.Card;
 import javax.swing.*;
 
 public class Category extends JPanel implements ActionListener, MouseListener{

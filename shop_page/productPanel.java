@@ -1,11 +1,9 @@
 package shop_page;
 
-import javax.swing.*;
-
 import entities.products;
-
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.*;
 
 public class productPanel extends JPanel implements ActionListener,MouseListener{
     Color buttonColor = new Color(0, 128, 128);
@@ -16,13 +14,16 @@ public class productPanel extends JPanel implements ActionListener,MouseListener
     JLabel imgLabel, name, price;
     JButton addButton;
     products prd;
-    cartPanel cart;
+    cartPanel cart;   // reference to cartPanel///////////
+
     
 
-    public productPanel(products prd) {
+    public productPanel(products prd, cartPanel cart) {
         this.prd = prd;
+        this.cart = cart;
         this.setBackground(new Color(255, 245, 230));
-        imgLabel = new JLabel(prd.getImage());
+        this.setLayout(null);////////////////////////
+        imgLabel = new JLabel(new ImageIcon("images/" + prd.getImageName() + ".png"));////////////////////////////
         imgLabel.setBounds(40, 40, 170, 170);
         this.add(imgLabel);
 
@@ -48,14 +49,24 @@ public class productPanel extends JPanel implements ActionListener,MouseListener
         this.add(addButton);
     }
  
+/////////////////////////////##
+ @Override
+public void actionPerformed(ActionEvent ae) {
+    if (ae.getSource() == addButton) {
+        cart.addProduct(prd.getProductName(), prd.getPrice(), prd.getImageName());
 
-    @Override
-    public void actionPerformed(ActionEvent ae) {
-        if (ae.getSource() == addButton) {
-            
-        }
+        // // 🔔 directly update checkout total
+        // Container parent = cart.getParent();
+        // while (parent != null && !(parent instanceof shopPage)) {
+        //     parent = parent.getParent();
+        // }
+        // if (parent instanceof shopPage) {
+        //     ((shopPage) parent).updateCheckoutTotal();
+        // }
     }
+}
 
+//////////////////////////////////##
 
     @Override
     public void mouseClicked(MouseEvent e) {

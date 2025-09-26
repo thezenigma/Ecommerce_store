@@ -1,13 +1,10 @@
 package shop_page;
 
-import javax.swing.*;
-
 import entities.*;
-
 import java.awt.*;
-import java.awt.event.*;
 import java.io.*;
 import java.util.*;
+import javax.swing.*;
 
 public class shopBody extends JPanel{
     productPanel[][] productPanels;
@@ -17,8 +14,12 @@ public class shopBody extends JPanel{
     File myFile;
     Scanner sc;
 
-    public shopBody(String filename) {
+    cartPanel cart;   // reference//////////////////
+
+    public shopBody(String filename, cartPanel cart) {//////////////
         this.filename = filename;
+        this.cart = cart;
+
         prdArray = new products[9];
         insertPrd(prdArray);
         this.setPreferredSize(new Dimension(1030, 1200));
@@ -29,7 +30,7 @@ public class shopBody extends JPanel{
             widthAdd = 0;
             for (int j = 0; j < 3; j++) {
                 if (count < prdArray.length && prdArray[count] != null) {
-                    productPanels[i][j] = new productPanel(prdArray[count]);
+                    productPanels[i][j] = new productPanel(prdArray[count], cart);/////////////////////
                     productPanels[i][j].setLayout(null);
                     productPanels[i][j].setBounds((80 + widthAdd), (30 + heightAdd), 250, 350);
                     this.add(productPanels[i][j]);
@@ -51,10 +52,7 @@ public class shopBody extends JPanel{
                 String line = sc.nextLine();
                 String[] value = line.split("\t");
                 if (value.length >= 3) {
-                    prd[idx] = new products();
-                    prd[idx].setProductName(value[0]);
-                    prd[idx].setPrice(value[1]);
-                    prd[idx].setImage("./images/" + value[2] + ".png");
+                    prd[idx] = new products(value[0], value[1], value[2]);/////////////////
                     idx++;
                 }
             }
