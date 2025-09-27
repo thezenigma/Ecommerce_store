@@ -1,11 +1,9 @@
 package main;
 
-import java.awt.CardLayout;
-
-import javax.swing.*;
-
 import account_page.account_page;
 import checkout.*;
+import java.awt.CardLayout;
+import javax.swing.*;
 import login_page.*;
 import register_page.*;
 import shop_page.*;
@@ -26,6 +24,8 @@ public class Frame extends JFrame {
 
         card = new CardLayout();
         pageHolder = new JPanel(card);
+
+        
         loginPage login = new loginPage(card, pageHolder);
         registerPage registerPage = new registerPage(card, pageHolder);
         shopPage shopPage = new shopPage(card, pageHolder);

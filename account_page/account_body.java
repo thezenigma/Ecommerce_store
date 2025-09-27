@@ -1,13 +1,14 @@
 package account_page;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.*;
 
 public class account_body extends JPanel implements ActionListener, MouseListener{
     JLabel accountTitle, currentDetails, updateDetails, nameLabel, passLabel, emailLabel, curName, curPass, curEmail;
     JTextField upName, upPass, upEmail;
-    JButton saveBtn;
+    JButton saveBtn , deleteBtn;////////////
+
 
     Font titleFont = new Font("Helvetica", Font.BOLD, 28);
     Font sectionFont = new Font("Helvetica", Font.BOLD, 18);
@@ -16,7 +17,19 @@ public class account_body extends JPanel implements ActionListener, MouseListene
     Color btnColor = new Color(0, 128, 128);
     Color hoverColor = new Color(64, 192, 192);
 
-    public account_body() {
+    // এখানে registration থেকে আসা মানগুলো ধরে রাখবো
+    String name;
+    String email;
+    String password;
+
+
+    public account_body(CardLayout card, JPanel pageHolder, String name, String email, String password) {///////////
+
+        this.name = name;/////
+        this.email = email;/////////
+        this.password = password;/////////
+
+
         this.setLayout(null);
         this.setBounds(0, 80, 1280, 640);
         this.setBackground(new Color(255, 228, 225));
@@ -36,7 +49,7 @@ public class account_body extends JPanel implements ActionListener, MouseListene
         nameLabel.setFont(labelFont);
         nameLabel.setBounds(120, 130, 100, 30);
 
-        curName = new JLabel("Sophia Carter");
+        curName = new JLabel(this.name);////
         curName.setFont(fieldFont);
         curName.setBounds(260, 130, 300, 30);
         
@@ -47,7 +60,7 @@ public class account_body extends JPanel implements ActionListener, MouseListene
         passLabel.setFont(labelFont);
         passLabel.setBounds(120, 170, 100, 30);
 
-        curPass = new JLabel("sophia123");
+        curPass = new JLabel(this.password);
         curPass.setFont(fieldFont);
         curPass.setBounds(260, 170, 300, 30);
         
@@ -58,7 +71,7 @@ public class account_body extends JPanel implements ActionListener, MouseListene
         emailLabel.setFont(labelFont);
         emailLabel.setBounds(120, 210, 100, 30);
 
-        curEmail = new JLabel("sophia.carter@email.com");
+        curEmail = new JLabel(this.email);
         curEmail.setFont(fieldFont);
         curEmail.setBounds(260, 210, 300, 30);
 
@@ -100,6 +113,18 @@ public class account_body extends JPanel implements ActionListener, MouseListene
         saveBtn.addActionListener(this);
         saveBtn.addMouseListener(this);
 
+
+        ////////////////////////////////
+        deleteBtn = new JButton("Delete Account");
+        deleteBtn.setFont(new Font("Helvetica", Font.BOLD, 14));
+        deleteBtn.setBounds(300, 540, 150, 40);
+        deleteBtn.setFocusable(false);
+        deleteBtn.setBorderPainted(false);
+        deleteBtn.setBackground(Color.RED);
+        deleteBtn.setForeground(Color.WHITE);
+        deleteBtn.addActionListener(this);
+        /// /////////////////////////////
+
         this.add(accountTitle);
         this.add(currentDetails);
         this.add(nameLabel);
@@ -119,6 +144,7 @@ public class account_body extends JPanel implements ActionListener, MouseListene
         this.add(sep1);
         this.add(sep2);
         this.add(sep3);
+        this.add(deleteBtn);
     }
 
     @Override
@@ -149,9 +175,31 @@ public class account_body extends JPanel implements ActionListener, MouseListene
             saveBtn.setBackground(btnColor);
         }
     }
-
-    @Override
+ @Override
     public void actionPerformed(ActionEvent e) {
-       
+        if (e.getSource() == saveBtn) {
+            if (!upName.getText().isEmpty()) {
+                name = upName.getText();
+                curName.setText(name);
+            }
+            if (!upPass.getText().isEmpty()) {
+                password = upPass.getText();
+                curPass.setText(password);
+            }
+            if (!upEmail.getText().isEmpty()) {
+                email = upEmail.getText();
+                curEmail.setText(email);
+            }
+            JOptionPane.showMessageDialog(this, "Account updated!");
+        } 
+        else if (e.getSource() == deleteBtn) {
+            name = "";
+            email = "";
+            password = "";
+            curName.setText("");
+            curPass.setText("");
+            curEmail.setText("");
+            JOptionPane.showMessageDialog(this, "Account deleted!");
+        }
     }
 }

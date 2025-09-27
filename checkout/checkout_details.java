@@ -1,11 +1,13 @@
 package checkout;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.*;
+import shop_page.cartPanel;/////////////////
+
 
 public class checkout_details extends JPanel implements ActionListener, MouseListener{
     JLabel title, shippingMethod, nameLabel, phoneLabel, addressLabel, cityLabel, areaLabel, orderLabel, normalBill, expressBill, subtotal, subtotalAmt, total, totalAmt, paymentOption;
@@ -15,19 +17,25 @@ public class checkout_details extends JPanel implements ActionListener, MouseLis
     JButton placeOrder;
     JPanel pageHolder;
     CardLayout cardL;
+
+    cartPanel cart;   // 🟢 cart reference রাখব
+
     Font titleFont = new Font("Helvetica", Font.BOLD, 20);
     Font labelFont = new Font("Helvetica", Font.BOLD, 16);
     Font fieldFont = new Font("Helvetica", Font.PLAIN, 16);
     Color bg = new Color(255, 228, 225);
     Color btnColor = new Color(0, 128, 128);
     Color hvrColor = new Color(64, 192, 192);
-    
+
+
     public checkout_details(CardLayout cardL, JPanel pageHolder) {
         this.cardL = cardL;
         this.pageHolder = pageHolder;
+        this.cart = cartPanel.sharedInstance; // ✅ shared cart instance
         this.setLayout(null);
         this.setBounds(0, 80, 1280, 640);
         this.setBackground(bg);
+
         
         title = new JLabel("BILLING & SHIPPING");
         title.setBounds(60, 70, 250, 50);
@@ -108,9 +116,10 @@ public class checkout_details extends JPanel implements ActionListener, MouseLis
         subtotal.setBounds(700, 290, 100, 30);
         subtotal.setFont(fieldFont);
 
-        subtotalAmt = new JLabel("$21.99", SwingConstants.RIGHT);
+         // ✅ এখন cart null হতে পারে, তাই $0.0 দিয়ে শুরু করবো
+        subtotalAmt = new JLabel("$0.0", SwingConstants.RIGHT);
         subtotalAmt.setBounds(990, 290, 100, 30);
-        subtotalAmt.setFont(fieldFont);
+        this.add(subtotalAmt);
 
         JSeparator line = new JSeparator();
         line.setBounds(700, 330, 400, 20);
@@ -119,9 +128,13 @@ public class checkout_details extends JPanel implements ActionListener, MouseLis
         total.setBounds(700, 350, 100, 30);
         total.setFont(titleFont);
 
-        totalAmt = new JLabel("$30.99");
+        // total label
+        totalAmt = new JLabel("$0.0", SwingConstants.RIGHT);
         totalAmt.setBounds(1040, 350, 100, 30);
-        totalAmt.setFont(labelFont);
+        this.add(totalAmt);
+
+
+
         
         paymentOption = new JLabel("Choose your Payment Option");
         paymentOption.setBounds(700, 390, 300, 30);
@@ -179,39 +192,50 @@ public class checkout_details extends JPanel implements ActionListener, MouseLis
         this.add(COD);
         this.add(card);
         this.add(placeOrder);
+
+        updateTotal(); // ✅ প্রথমেই হিসাব করে দেখাও
         
     }
+////////////////////////////////////
+ //   // ✅ subtotal + total update method
+    private void updateTotal() {
+        if (cart == null) return;   // cart null হলে কিছু করো না
+
+        double subTotalValue = cart.getCartSubtotal();
+        subtotalAmt.setText("$" + subTotalValue);
+
+        double shipping = normal.isSelected() ? 9 : 18;
+        double totalValue = subTotalValue + shipping;
+        totalAmt.setText("$" + totalValue);
+    }
+//////////////////////////////////////
+
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-        String s1 = nameField.getText().trim();
-        String s2 = phoneField.getText().trim();
-        String s3 = city.getText().trim();
-        String s4 = area.getText().trim();
+   public void actionPerformed(ActionEvent e) {
         if (e.getSource() == placeOrder) {
-            if (s1.isEmpty() || s2.isEmpty() || s3.isEmpty() || s4.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Please fill out all fields!");
-            } else {
-                JOptionPane.showMessageDialog(null, "Your order has been placed!");
-                nameField.setText(null);
-                phoneField.setText(null);
-                city.setText(null);
-                area.setText(null);
-                orderNote.setText(null);
-                cardL.show(pageHolder, "shop");
-            }
+            JOptionPane.showMessageDialog(null, "Your order has been placed!");
+            cart.clearCart();
+            updateTotal();
+            cardL.show(pageHolder, "shop");
         }
-        if (e.getSource() == normal) {
-            double sub = Double.parseDouble(subtotalAmt.getText().substring(1));
-            double nBill = 9;
-            totalAmt.setText("$" + (Math.round((sub + nBill) * 100.0)/ 100.0));
-        }
-        else if (e.getSource() == express) {
-            double sub = Double.parseDouble(subtotalAmt.getText().substring(1));
-            double eBill = 18;
-            totalAmt.setText("$" + (Math.round((sub + eBill) * 100.0)/ 100.0));
+
+        if (e.getSource() == normal || e.getSource() == express) {
+            updateTotal();
         }
     }
+
+        //if (e.getSource() == normal) {
+            //double sub = Double.parseDouble(subtotalAmt.getText().substring(1));
+            //double nBill = 9;
+            //totalAmt.setText("$" + (Math.round((sub + nBill) * 100.0)/ 100.0));
+       // }
+        //else if (e.getSource() == express) {
+            //double sub = Double.parseDouble(subtotalAmt.getText().substring(1));
+            //double eBill = 18;
+            //totalAmt.setText("$" + (Math.round((sub + eBill) * 100.0)/ 100.0));
+       // }
+   // }
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -241,4 +265,6 @@ public class checkout_details extends JPanel implements ActionListener, MouseLis
             placeOrder.setBackground(btnColor);
         }
     }
+
+
 }
