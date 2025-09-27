@@ -1,5 +1,7 @@
 package register_page;
 import entities.account;
+import entities.session;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -123,6 +125,7 @@ public class registerPanel extends JPanel implements ActionListener, MouseListen
             else {
                 a1 = new account(s1, s2, s3);
                 a1.addAccount();
+                session.currentAccount = a1;
                 errorMsg.setText(null);
                 JOptionPane.showMessageDialog(null, "Registration Done! Welcome!");
                 nameField.setText(null);

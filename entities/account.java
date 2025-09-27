@@ -16,6 +16,11 @@ public class account {
     public account() {
 
     }
+
+    public account(String email, String pass) {
+        this.email = email;
+        this.pass = pass;
+    }
     
     public account(String name, String email, String pass) {
         this.name = name;
@@ -37,32 +42,122 @@ public class account {
    }
 
    public String getemail() {
-       int endidx = email.indexOf("@");
-       email = email.substring(0, endidx);
-       return email;
+       if (email == null) {
+           return "";
+        }
+        int endidx = email.indexOf("@");
+        if (endidx == -1) {
+            // No '@' found, return the whole email
+            return email;
+        }
+        return email.substring(0, endidx);
    }
    
    public void setpass(String pass) {
        this.pass = pass;
    }
    
-   public String getpass(){
-        return pass;
+   public String getpass() {
+       return pass;
    }
+   
+   public void updateEmail(String username, String email) {
+        try {
+            File myFile = new File("./data/userdata.txt");
+            Scanner sc = new Scanner(myFile);
 
-   public void displayinfo(){
-          
-   }
+            String content = "";
 
-   public void updatenewpassword(String newpass){
-    
-   }
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine();
 
-   public boolean checkpassword(String input) {
-        return this.pass.equals(input);
-   }
+                if (!line.isEmpty()) {
+                    String[] parts = line.split("\t");
 
-    @SuppressWarnings("CallToPrintStackTrace")
+                    if (parts[0].equals(username)){
+                        parts[1] = email;
+                        this.email = email;
+                        line = parts[0] + "\t" + parts[1] + "\t" + parts[2];
+                    }
+                }
+
+                content += line + "\n"; 
+            }
+
+            FileWriter fw = new FileWriter(myFile, false); 
+            fw.write(content);
+            fw.close();
+
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+    }
+
+   public void updateName(String email, String username) {
+        try {
+            File myFile = new File("./data/userdata.txt");
+            Scanner sc = new Scanner(myFile);
+
+            String content = "";
+
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine();
+
+                if (!line.isEmpty()) {
+                    String[] parts = line.split("\t");
+
+                    if (parts[1].equals(email)) {
+                        parts[0] = username;
+                        this.name = username;
+                        line = parts[0] + "\t" + parts[1] + "\t" + parts[2];
+                    }
+                }
+
+                content += line + "\n"; 
+            }
+
+            FileWriter fw = new FileWriter(myFile, false); 
+            fw.write(content);
+            fw.close();
+
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+    }
+
+
+    public void updatePassword(String username, String newpass) {
+        try {
+            File myFile = new File("./data/userdata.txt");
+            Scanner sc = new Scanner(myFile);
+
+            String content = "";
+
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine();
+
+                if (!line.isEmpty()) {
+                    String[] parts = line.split("\t");
+
+                    if (parts[0].equals(username)) {
+                        parts[2] = newpass;
+                        this.pass = newpass;
+                        line = parts[0] + "\t" + parts[1] + "\t" + parts[2];
+                    }
+                }
+                content += line + "\n";
+            }
+            FileWriter fw = new FileWriter(myFile, false);
+            fw.write(content);
+            fw.close();
+
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+    }
+   
+
+
    public void addAccount() {
        try {
            myFile = new File("data/userdata.txt");
@@ -79,7 +174,6 @@ public class account {
        }
    }
 
-    @SuppressWarnings("CallToPrintStackTrace")
    public boolean findAccount(String email) {
        int endidx = email.indexOf("@");
        email = email.substring(0, endidx);
@@ -103,36 +197,59 @@ public class account {
    }
    
    public boolean checkCredentials(String input, String pass) {
-    boolean flag = false;
+       boolean flag = false;
 
-    try {
-        File myFile = new File("data/userdata.txt");
-        Scanner sc = new Scanner(myFile);
+       try {
+           File myFile = new File("data/userdata.txt");
+           Scanner sc = new Scanner(myFile);
 
-        while (sc.hasNextLine()) {
-            String line = sc.nextLine();
+           while (sc.hasNextLine()) {
+               String line = sc.nextLine();
 
-            if (!line.isEmpty()) {
-                String[] parts = line.split("\t");  
+               if (!line.isEmpty()) {
+                   String[] parts = line.split("\t");
 
-                String fileEmail = parts[1];
-                String filePass  = parts[2];
+                   String fileEmail = parts[1];
+                   String filePass = parts[2];
 
-                fileEmail += "@gmail.com";
+                   fileEmail += "@gmail.com";
 
-                if (input.equals(fileEmail) && pass.equals(filePass)) {
-                    flag = true;
-                    break;
-                }
-            }
-        }
-        sc.close();
-    } catch (IOException ex) {
-        ex.printStackTrace();
-    }
+                   if (input.equals(fileEmail) && pass.equals(filePass)) {
+                       flag = true;
+                       break;
+                   }
+               }
+           }
+           sc.close();
+       } catch (IOException ex) {
+           ex.printStackTrace();
+       }
 
-    return flag;
-}
+       return flag;
+   }
+
+   public void findName(String email) {
+       try {
+           myFile = new File("./data/userdata.txt");
+           Scanner sc = new Scanner(myFile);
+           while (sc.hasNextLine()) {
+               String line = sc.nextLine();
+               if (!line.isEmpty()) {
+                   String[] parts = line.split("\t");
+                   if (parts[2].equals(email)) {
+                       this.name = parts[1];
+                   }
+               }
+           }
+
+       } catch (IOException ioe) {
+           ioe.printStackTrace();
+       }
+   }
+   
+
+
+   
    
 
 }

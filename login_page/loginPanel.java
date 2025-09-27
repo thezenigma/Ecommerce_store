@@ -107,6 +107,7 @@ public class loginPanel extends JPanel implements ActionListener, MouseListener 
             errorMsg.setText(null);
             emailField.setText(null);
             passField.setText(null);
+            session.currentAccount = new account(s2, s3);
             JOptionPane.showMessageDialog(this, "Login successful! Welcome " + s2);
             card.show(pageHolder, "shop");
         } 

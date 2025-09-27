@@ -4,6 +4,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import entities.session;
+
 public class account_body extends JPanel implements ActionListener, MouseListener{
     JLabel accountTitle, currentDetails, updateDetails, nameLabel, passLabel, emailLabel, curName, curPass, curEmail;
     JTextField upName, upPass, upEmail;
@@ -17,18 +19,14 @@ public class account_body extends JPanel implements ActionListener, MouseListene
     Color btnColor = new Color(0, 128, 128);
     Color hoverColor = new Color(64, 192, 192);
 
-    // এখানে registration থেকে আসা মানগুলো ধরে রাখবো
     String name;
     String email;
     String password;
 
 
-    public account_body(CardLayout card, JPanel pageHolder, String name, String email, String password) {///////////
+    public account_body(CardLayout card, JPanel pageHolder) {
 
-        this.name = name;/////
-        this.email = email;/////////
-        this.password = password;/////////
-
+        retrieveCredentials();
 
         this.setLayout(null);
         this.setBounds(0, 80, 1280, 640);
@@ -176,30 +174,50 @@ public class account_body extends JPanel implements ActionListener, MouseListene
         }
     }
  @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == saveBtn) {
-            if (!upName.getText().isEmpty()) {
-                name = upName.getText();
-                curName.setText(name);
+ public void actionPerformed(ActionEvent e) {
+     if (e.getSource() == saveBtn) {
+         if (!upName.getText().isEmpty()) {
+            session.currentAccount.updateName(email, upName.getText());
+            retrieveCredentials();
+            curName.setText(name);
+         }
+         if (!upPass.getText().isEmpty()) {
+            session.currentAccount.updatePassword(name, upPass.getText());
+            retrieveCredentials();
+            curPass.setText(password);
+         }
+         if (!upEmail.getText().isEmpty()) {
+            session.currentAccount.updateEmail(name, upEmail.getText());
+            retrieveCredentials();
+            curEmail.setText(email);
+         }
+         JOptionPane.showMessageDialog(this, "Account updated!");
+     } else if (e.getSource() == deleteBtn) {
+         name = "";
+         email = "";
+         password = "";
+         curName.setText("");
+         curPass.setText("");
+         curEmail.setText("");
+         JOptionPane.showMessageDialog(this, "Account deleted!");
+     }
+ }
+
+    public void retrieveCredentials() {
+        if (session.currentAccount != null) {
+            this.email = session.currentAccount.getemail();
+            if (session.currentAccount.getname() == null) {
+                session.currentAccount.findName(email);
+                session.currentAccount.getname();
+            } else {
+                session.currentAccount.getname();
             }
-            if (!upPass.getText().isEmpty()) {
-                password = upPass.getText();
-                curPass.setText(password);
-            }
-            if (!upEmail.getText().isEmpty()) {
-                email = upEmail.getText();
-                curEmail.setText(email);
-            }
-            JOptionPane.showMessageDialog(this, "Account updated!");
-        } 
-        else if (e.getSource() == deleteBtn) {
-            name = "";
-            email = "";
-            password = "";
-            curName.setText("");
-            curPass.setText("");
-            curEmail.setText("");
-            JOptionPane.showMessageDialog(this, "Account deleted!");
+            this.password = session.currentAccount.getpass();
+        }
+        else {
+            this.email = "";
+            this.name = "";
+            this.password = "";
         }
     }
 }
