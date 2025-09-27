@@ -246,10 +246,52 @@ public class account {
            ioe.printStackTrace();
        }
    }
-   
 
 
-   
-   
+   //////////////////////////////////////
+     private void updateField(String matchEmail, int fieldIndex, String newValue) {
+        try {
+            File file = new File("data/userdata.txt");
+            Scanner sc = new Scanner(file);
+            StringBuilder content = new StringBuilder();
 
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine();
+                String[] parts = line.split("\t");
+                if (parts.length >= 3 && parts[1].equals(matchEmail)) {
+                    parts[fieldIndex] = newValue;
+                    line = String.join("\t", parts);
+                }
+                content.append(line).append("\n");
+            }
+
+            FileWriter fw = new FileWriter(file, false);
+            fw.write(content.toString());
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadAccount() {
+        try (Scanner sc = new Scanner(new File("data/userdata.txt"))) {
+            while (sc.hasNextLine()) {
+                String[] parts = sc.nextLine().split("\t");
+                if (parts.length >= 3 && parts[1].equals(this.email)) {
+                    this.name = parts[0];
+                    this.pass = parts[2];
+                    return;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
+   
+
+
+   
+   
+
+

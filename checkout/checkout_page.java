@@ -1,8 +1,6 @@
 package checkout;
 
 import java.awt.CardLayout;
-import java.awt.Color;
-
 import javax.swing.*;
 
 public class checkout_page extends JPanel {

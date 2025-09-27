@@ -18,7 +18,7 @@ public class checkout_details extends JPanel implements ActionListener, MouseLis
     JPanel pageHolder;
     CardLayout cardL;
 
-    cartPanel cart;   // 🟢 cart reference রাখব
+    cartPanel cart;  
 
     Font titleFont = new Font("Helvetica", Font.BOLD, 20);
     Font labelFont = new Font("Helvetica", Font.BOLD, 16);
@@ -31,7 +31,7 @@ public class checkout_details extends JPanel implements ActionListener, MouseLis
     public checkout_details(CardLayout cardL, JPanel pageHolder) {
         this.cardL = cardL;
         this.pageHolder = pageHolder;
-        this.cart = cartPanel.sharedInstance; // ✅ shared cart instance
+        this.cart = cartPanel.sharedInstance; 
         this.setLayout(null);
         this.setBounds(0, 80, 1280, 640);
         this.setBackground(bg);
@@ -116,7 +116,6 @@ public class checkout_details extends JPanel implements ActionListener, MouseLis
         subtotal.setBounds(700, 290, 100, 30);
         subtotal.setFont(fieldFont);
 
-         // ✅ এখন cart null হতে পারে, তাই $0.0 দিয়ে শুরু করবো
         subtotalAmt = new JLabel("$0.0", SwingConstants.RIGHT);
         subtotalAmt.setBounds(990, 290, 100, 30);
         this.add(subtotalAmt);
@@ -193,13 +192,12 @@ public class checkout_details extends JPanel implements ActionListener, MouseLis
         this.add(card);
         this.add(placeOrder);
 
-        updateTotal(); // ✅ প্রথমেই হিসাব করে দেখাও
+        updateTotal(); 
         
     }
-////////////////////////////////////
- //   // ✅ subtotal + total update method
+
     private void updateTotal() {
-        if (cart == null) return;   // cart null হলে কিছু করো না
+        if (cart == null) return;  
 
         double subTotalValue = cart.getCartSubtotal();
         subtotalAmt.setText("$" + subTotalValue);
@@ -208,7 +206,7 @@ public class checkout_details extends JPanel implements ActionListener, MouseLis
         double totalValue = subTotalValue + shipping;
         totalAmt.setText("$" + totalValue);
     }
-//////////////////////////////////////
+
 
 
     @Override
@@ -225,17 +223,6 @@ public class checkout_details extends JPanel implements ActionListener, MouseLis
         }
     }
 
-        //if (e.getSource() == normal) {
-            //double sub = Double.parseDouble(subtotalAmt.getText().substring(1));
-            //double nBill = 9;
-            //totalAmt.setText("$" + (Math.round((sub + nBill) * 100.0)/ 100.0));
-       // }
-        //else if (e.getSource() == express) {
-            //double sub = Double.parseDouble(subtotalAmt.getText().substring(1));
-            //double eBill = 18;
-            //totalAmt.setText("$" + (Math.round((sub + eBill) * 100.0)/ 100.0));
-       // }
-   // }
 
     @Override
     public void mouseClicked(MouseEvent e) {

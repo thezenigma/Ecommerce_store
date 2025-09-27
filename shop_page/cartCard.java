@@ -16,17 +16,11 @@ public class cartCard extends JPanel implements ActionListener, MouseListener{
     Font nameFont = new Font("Helvetica", Font.BOLD, 16);
     cartPanel cart;
 
-    //last...........
-   // public void setCartPanel(cartPanel c) {
-    //this.cart = c;
-     //}
-
-    ///////////////////////////
     int quantity = 1;
     double unitPrice;
-    /////////////////////////////
+    
 
-    public cartCard(String name, String price, String imageName) {/////////////////////////
+    public cartCard(String name, String price, String imageName) {
         this.setLayout(null);
         this.setBounds(15, 60, 315, 150);
         this.setBackground(new Color(255, 224, 217));
@@ -37,11 +31,11 @@ public class cartCard extends JPanel implements ActionListener, MouseListener{
         imgLabel = new JLabel(prdImg);
         imgLabel.setBounds(20, 30, 90, 90);
 
-        nameLabel = new JLabel(name);////////////
+        nameLabel = new JLabel(name);
         nameLabel.setFont(nameFont);
         nameLabel.setBounds(130, 30, 130, 30);
 
-        priceLabel = new JLabel(price);//////////////
+        priceLabel = new JLabel(price);
         priceLabel.setFont(priceFont);
         priceLabel.setBounds(130, 50, 60, 30);
 
@@ -58,7 +52,7 @@ public class cartCard extends JPanel implements ActionListener, MouseListener{
         add.addActionListener(this);
         add.addMouseListener(this);
 
-        qtyLabel = new JLabel(String.valueOf(quantity), SwingConstants.CENTER);///////////////////////
+        qtyLabel = new JLabel(String.valueOf(quantity), SwingConstants.CENTER);
         qtyLabel.setFont(priceFont);
         qtyLabel.setBounds(240, 90, 30, 30);
 
@@ -86,7 +80,7 @@ public class cartCard extends JPanel implements ActionListener, MouseListener{
    
 
 
-        totalLabel = new JLabel("Total: $" + String.format("%.2f", unitPrice));//////////////////
+        totalLabel = new JLabel("Total: $" + String.format("%.2f", unitPrice));
         totalLabel.setBounds(210, 120, 80, 30);
         totalLabel.setFont(priceFont);
 
@@ -99,7 +93,7 @@ public class cartCard extends JPanel implements ActionListener, MouseListener{
         this.add(delete);
         this.add(totalLabel);
     }
-///////////////////////////////////////////////////
+
   @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == add) {
@@ -114,19 +108,15 @@ public class cartCard extends JPanel implements ActionListener, MouseListener{
             }
         } else if (e.getSource() == delete) {
             if (cart != null) {
-                cart.deleteProduct(this);  //
+                cart.deleteProduct(this);  
             }
         }
     }
-    //   //########################################3
-    //     // 🔔 notify shopPage to update checkout total
-    //     notifyCheckoutUpdate();
-    //     //###########################################
+    
      private void updateTotal() {
         totalLabel.setText("Total: $" + String.format("%.2f", unitPrice * quantity));
-        cart.calculateTotal(); // update checkout
+        cart.calculateTotal();
     }
-    //#########################################
     public double getTotal() {
         return unitPrice * quantity;
     }
@@ -143,27 +133,7 @@ public class cartCard extends JPanel implements ActionListener, MouseListener{
         this.cart = cart;
     }
 
-
-    // private void notifyCheckoutUpdate() {
-    //     Container parent = this.getParent();
-    //     while (parent != null && !(parent instanceof cartPanel)) {
-    //         parent = parent.getParent();
-    //     }
-    //     if (parent instanceof cartPanel) {
-    //         cartPanel cp = (cartPanel) parent;
-
-    //         Container main = cp.getParent();
-    //         while (main != null && !(main instanceof shopPage)) {
-    //             main = main.getParent();
-    //         }
-    //         if (main instanceof shopPage) {
-    //             shopPage sp = (shopPage) main;
-    //             sp.updateCheckoutTotal();
-    //         }
-    //     }
-    // }
-
-    //@#########################################
+    
     @Override
     public void mouseClicked(MouseEvent e) {
         

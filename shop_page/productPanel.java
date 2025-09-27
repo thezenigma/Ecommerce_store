@@ -14,7 +14,7 @@ public class productPanel extends JPanel implements ActionListener,MouseListener
     JLabel imgLabel, name, price;
     JButton addButton;
     products prd;
-    cartPanel cart;   // reference to cartPanel///////////
+    cartPanel cart;
 
     
 
@@ -22,7 +22,7 @@ public class productPanel extends JPanel implements ActionListener,MouseListener
         this.prd = prd;
         this.cart = cart;
         this.setBackground(new Color(255, 245, 230));
-        this.setLayout(null);////////////////////////
+        this.setLayout(null);
         imgLabel = new JLabel(new ImageIcon("images/" + prd.getImageName() + ".png"));////////////////////////////
         imgLabel.setBounds(40, 40, 170, 170);
         this.add(imgLabel);
@@ -49,24 +49,15 @@ public class productPanel extends JPanel implements ActionListener,MouseListener
         this.add(addButton);
     }
  
-/////////////////////////////##
+
  @Override
 public void actionPerformed(ActionEvent ae) {
     if (ae.getSource() == addButton) {
         cart.addProduct(prd.getProductName(), prd.getPrice(), prd.getImageName());
 
-        // // 🔔 directly update checkout total
-        // Container parent = cart.getParent();
-        // while (parent != null && !(parent instanceof shopPage)) {
-        //     parent = parent.getParent();
-        // }
-        // if (parent instanceof shopPage) {
-        //     ((shopPage) parent).updateCheckoutTotal();
-        // }
+        
     }
 }
-
-//////////////////////////////////##
 
     @Override
     public void mouseClicked(MouseEvent e) {

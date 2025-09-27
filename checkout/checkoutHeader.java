@@ -1,8 +1,8 @@
 package checkout;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.*;
 
 public class checkoutHeader extends JPanel implements ActionListener, MouseListener{
     Color headerColor = new Color(255, 182, 193);

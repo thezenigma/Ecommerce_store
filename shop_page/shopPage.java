@@ -20,22 +20,17 @@ public class shopPage extends JPanel {
 
         cardCategory = new CardLayout();
         shopBody = new JPanel(cardCategory);
-        shopBody.setBounds(0, 60, 900, 600);////////////
+        shopBody.setBounds(0, 60, 900, 600);
         checkout = new toCheckoutPanel(card, pageHolder);
         cart = new cartPanel(checkout);
 
-        
-        
-//////////////////////////////////////////////
         cat1 = new shopBody("./data/face_packs.txt", cart);
         cat2 = new shopBody("./data/skincare.txt", cart);
         cat3 = new shopBody("./data/makeup.txt", cart);
         cat4 = new shopBody("./data/hair_care.txt", cart);
         cat5 = new shopBody("./data/perfume.txt", cart);
-        cat6 = new shopBody("./data/nails.txt", cart);
- /////////////////////////////////////////////////       
+        cat6 = new shopBody("./data/nails.txt", cart);    
         
-
         shopBody.add(cat1, "Face_Pack");
         shopBody.add(cat2, "Skincare");
         shopBody.add(cat3, "Makeup");
@@ -71,14 +66,5 @@ public class shopPage extends JPanel {
         cartScroll.setVisible(false);
         checkout.setVisible(false);
     }
-
-    // //##################################333
-    // // 🔥 main method to update checkout total
-    // public void updateCheckoutTotal() {
-    //     double total = cart.calculateTotal();
-    //     checkout.updateTotal(total);
-    // }
-    // //#########################################
    
-
 }

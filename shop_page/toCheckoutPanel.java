@@ -42,13 +42,10 @@ public class toCheckoutPanel extends JPanel implements ActionListener, MouseList
         this.add(totalAmt);
     }
 
-    //#####################################
-     // ✅ update total dynamically
     public void updateTotal(double totalValue) {
         totalAmt.setText("$" + String.format("%.2f", totalValue));
     }
   
-    //###################################
     @Override
     public void mouseClicked(MouseEvent e) {
         

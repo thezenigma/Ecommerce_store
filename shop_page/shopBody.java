@@ -14,9 +14,9 @@ public class shopBody extends JPanel{
     File myFile;
     Scanner sc;
 
-    cartPanel cart;   // reference//////////////////
+    cartPanel cart;
 
-    public shopBody(String filename, cartPanel cart) {//////////////
+    public shopBody(String filename, cartPanel cart) {
         this.filename = filename;
         this.cart = cart;
 
@@ -52,7 +52,7 @@ public class shopBody extends JPanel{
                 String line = sc.nextLine();
                 String[] value = line.split("\t");
                 if (value.length >= 3) {
-                    prd[idx] = new products(value[0], value[1], value[2]);/////////////////
+                    prd[idx] = new products(value[0], value[1], value[2]);
                     idx++;
                 }
             }

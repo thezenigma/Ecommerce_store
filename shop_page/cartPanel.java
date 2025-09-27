@@ -10,22 +10,17 @@ public class cartPanel extends JPanel {
     toCheckoutPanel checkout;
     int yOffset = 60;
 
-
-    
-    // 🟢 shared instance (checkout থেকে access করার জন্য)
     public static cartPanel sharedInstance;
 
     
 
     public cartPanel(toCheckoutPanel checkout) {
-        sharedInstance = this;   // ✅ এখানে instance assign হলো
+        sharedInstance = this; 
         this.checkout = checkout;
-         // 🟢 instance তৈরি হওয়ার সাথে সাথে save
         sharedInstance = this;
         this.setLayout(null);
         this.setBackground(new Color(255, 253, 249));
 
-        // Header label
         testLabel = new JLabel("CART");
         testLabel.setBounds(130, 20, 100, 30);
         testLabel.setFont(new Font("Baskerville Old Face", Font.PLAIN, 24));
@@ -33,7 +28,6 @@ public class cartPanel extends JPanel {
     }
 
     public void addProduct(String name, String price, String imageName) {
-        // check if product already exists
         for (int i = 0; i < card.length; i++) {
             if (card[i] != null && card[i].getProductName().equals(name)) {
                 card[i].increaseQuantity();
@@ -42,7 +36,6 @@ public class cartPanel extends JPanel {
             }
         }
 
-        // otherwise create new
         for (int i = 0; i < card.length; i++) {
             if (card[i] == null) {
                 card[i] = new cartCard(name, price, imageName);
@@ -68,7 +61,6 @@ public class cartPanel extends JPanel {
             }
         }
 
-        // reposition items
         int y = 60;
         for (int i = 0; i < card.length; i++) {
             if (card[i] != null) {
@@ -95,12 +87,6 @@ public class cartPanel extends JPanel {
         }
     }
 
-    /////////////..................fpr checkout
-// =====================================================
-    // 🟢 নিচের অংশ নতুন করে ADD করলাম (existing কিছু বদলাইনি)
-    // =====================================================
-
- // 🟢 Subtotal বের করার method
     public double getCartSubtotal() {
         double subtotal = 0.0;
         for (int i = 0; i < card.length; i++) {
@@ -111,7 +97,6 @@ public class cartPanel extends JPanel {
         return subtotal;
     }
 
-    // 🟢 Cart খালি করার method
     public void clearCart() {
         for (int i = 0; i < card.length; i++) {
             if (card[i] != null) {
